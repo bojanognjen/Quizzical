@@ -1,0 +1,55 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upper__corner {
+position: absolute;
+width: 330px;
+height: 235px;
+transform: rotate(39deg);
+top: -100px;
+right: -100px;
+border-bottom-left-radius: 43%;
+border-bottom-right-radius: 40%;
+background-color: hsl(53, 100%, 91%);
+}
+
+.lower__corner {
+  position: absolute;
+  background-color: hsl(210, 65%, 92%);
+  width: 330px;
+  height: 235px;
+  bottom: -70px;
+  left: -110px;
+  border-top-right-radius: 80%;
+  border-top-left-radius: 70%;
+}
+
+.start__screen {
+  text-align: center;
+}
+
+.start__title {
+  letter-spacing: 3px;
+  font-weight: 550;
+}
+
+.starting__subtitle {
+  margin-top: .5rem;
+  margin-bottom: 1.5rem;
+}
+
+.button {
+  background-color: hsla(230, 34%, 46%, 1);
+  border: none;
+  padding: .5rem;
+  border-radius: 10%;
+  width: 193px;
+  height: 52px;
+  border-radius: 15px;
+  color: #fff;
+  cursor: pointer;
+}
