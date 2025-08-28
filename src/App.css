@@ -47,10 +47,8 @@ z-index: -1;
 .button {
   background-color: hsla(230, 34%, 46%, 1);
   border: none;
-  padding: .5rem;
+  padding: .7rem 1.5rem;
   border-radius: 10%;
-  width: 193px;
-  height: 52px;
   border-radius: 15px;
   color: #fff;
   cursor: pointer;
@@ -93,8 +91,9 @@ z-index: -1;
   display: none;
 }
 
-.answer input:checked + span {
-  background-color: lightgreen;
+.answer:has(input:checked){
+  background-color: hsl(230, 61%, 90%);
+  border: none;
 }
 
 .check {
