@@ -1,9 +1,13 @@
+import Question from "./Question";
+
 export default function GameScreen({ data }) {
+  console.log(data);
   return (
-    <div>
+    <form>
       {data.results.map((element, index) => (
-        <p key={index}>{element.question}</p>
+        <Question key={index} element={element} />
       ))}
-    </div>
-  );
+      <button className="check button">Check answers</button>
+    </form>
+  )
 }
