@@ -89,6 +89,14 @@ z-index: -1;
   margin: 0;
 }
 
+.answer input {
+  display: none;
+}
+
+.answer input:checked + span {
+  background-color: lightgreen;
+}
+
 .check {
   margin-top: 3rem;
 }

@@ -1,7 +1,6 @@
 import Question from "./Question";
 
 export default function GameScreen({ data }) {
-  console.log(data);
   return (
     <form>
       {data.results.map((element, index) => (

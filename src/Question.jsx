@@ -21,8 +21,8 @@ export default function Question({ element, index }) {
       <div className="answers">
         {answers.map((ans, i) => (
           <label className="answer" key={i}>
-            <input type="radio" name={`answer-${index}`} value={ans} />
-            {ans}
+            <input type="radio" name={element.question.slice(-20)} value={ans} />
+            <span>{ans}</span>
           </label>
         ))}
       </div>
