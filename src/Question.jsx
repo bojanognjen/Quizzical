@@ -1,6 +1,7 @@
 import he from "he";
+import { useEffect, useState } from "react";
 
-export default function Question({ element, index }) {
+export default function Question({ element, index, questionId, setAnswers }) {
   function shuffleArray(array) {
     const arr = [...array];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -10,19 +11,33 @@ export default function Question({ element, index }) {
     return arr;
   }
 
-  const answers = shuffleArray([
-    element.correct_answer,
-    ...element.incorrect_answers,
-  ]);
+const [options, setOptions] = useState([]);
+
+useEffect(() => {
+  setOptions(shuffleArray([element.correct_answer, ...element.incorrect_answers]));
+}, []);
+
+
+  const handleChange = (value) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: value, // save selected answer for this question
+    }));
+  };
 
   return (
-    <div className="question__block">
+    <div key={index} className="question__block">
       <p className="question">{he.decode(element.question)}</p>
       <div className="answers">
-        {answers.map((ans, i) => (
+        {options.map((opt, i) => (
           <label className="answer" key={i}>
-            <input type="radio" name={element.question.slice(-20)} value={ans} />
-            <span>{ans}</span>
+            <input
+              type="radio"
+              name={`q${questionId}`}
+              value={he.decode(opt)}
+              onChange={()=> handleChange(he.decode(opt))}
+            />
+            <span>{he.decode(opt)}</span>
           </label>
         ))}
       </div>
