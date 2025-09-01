@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function GameScreen({ data }) {
 
   const [answers, setAnswers] = useState({});
+  const [allAnswered, setAllAnswered] = useState(true);
 
 //   data.results.map((question, index) => {
 //   const userAnswer = answers[index];      // what user selected
@@ -28,7 +29,7 @@ export default function GameScreen({ data }) {
       {data.results.map((element, index) => (
         <Question key={index} element={element} questionId={index} setAnswers={setAnswers} />
       ))}
-      <CheckAnswers data={data}/>
+      <CheckAnswers setAllAnswered={setAllAnswered} answers={answers} allAnswered={allAnswered} data={data}/>
     </form>
   )
 }
