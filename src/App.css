@@ -96,6 +96,21 @@ z-index: -1;
   border: none;
 }
 
+.answer_checked {
+  pointer-events: none;
+  border: 1px solid hsl(229, 30%, 72%);
+  color: hsl(231, 17%, 62%);
+}
+
+.answer.correctAnswer {
+  color: hsl(231, 42%, 28%);
+  background-color: hsl(133, 46%, 71%);
+}
+
+.answer.wrongAnswer {
+  background-color: hsl(356, 62%, 91%);
+}
+
 .check {
   margin-top: 3rem;
 }

@@ -1,35 +1,36 @@
 import Question from "./Question";
-import CheckAnswers from "./CheckAnswers"
 import { useState } from "react";
 
 export default function GameScreen({ data }) {
+  console.log(data)
+  const arrayLength = data.results.length
+  const [answers, setAnswers] = useState(Array(arrayLength).fill(null));
+  const [error, setError] = useState("");
+  const [checked, setChecked] = useState(false);
 
-  const [answers, setAnswers] = useState({});
-  const [allAnswered, setAllAnswered] = useState(true);
+   function handleSubmit(e) {
+    e.preventDefault();
 
-//   data.results.map((question, index) => {
-//   const userAnswer = answers[index];      // what user selected
-//   const correctAnswer = question.correct_answer;
+    const allAnswered = answers.every((ans) => ans !== null);
 
-
-
-//   if (userAnswer === correctAnswer) {
-//     console.log(`Question ${index} ✅ Correct`);
-//   } else {
-//     console.log(`Question ${index} ❌ Wrong. Correct answer: ${correctAnswer}`);
-//   }
-// });
-
-  const handleAnswer = (id, value) => {
-    setAnswers(prev => ({...prev, [id]: value}));
+    if (!allAnswered) {
+      setError("⚠️ Please answer all questions before submitting.");
+    } else {
+      setChecked(true);
+    }
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {data.results.map((element, index) => (
-        <Question key={index} element={element} questionId={index} setAnswers={setAnswers} />
+        <Question key={index} checked={checked} answers={answers} correct_answer={element.correct_answer} element={element} questionId={index} setAnswers={setAnswers} />
       ))}
-      <CheckAnswers setAllAnswered={setAllAnswered} answers={answers} allAnswered={allAnswered} data={data}/>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      <button type="submit" className="check button">
+        Check answers
+      </button>
     </form>
   )
 }

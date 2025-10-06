@@ -1,7 +1,15 @@
 import he from "he";
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 
-export default function Question({ element, index, questionId, setAnswers }) {
+export default function Question({
+  element,
+  questionId,
+  setAnswers,
+  answers,
+  correct_answer,
+  checked,
+}) {
   function shuffleArray(array) {
     const arr = [...array];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -11,31 +19,42 @@ export default function Question({ element, index, questionId, setAnswers }) {
     return arr;
   }
 
-const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState([]);
 
-useEffect(() => {
-  setOptions(shuffleArray([element.correct_answer, ...element.incorrect_answers]));
-}, []);
+  useEffect(() => {
+    setOptions(
+      shuffleArray([element.correct_answer, ...element.incorrect_answers])
+    );
+  }, []);
 
-
-  const handleChange = (value) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: value, // save selected answer for this question
-    }));
+  const handleChange = (questionIndex, value) => {
+    setAnswers((prev) => {
+      const newAnswers = [...prev];
+      newAnswers[questionIndex] = value;
+      return newAnswers;
+    });
   };
 
   return (
-    <div key={index} className="question__block">
+    <div className="question__block">
       <p className="question">{he.decode(element.question)}</p>
       <div className="answers">
         {options.map((opt, i) => (
-          <label className="answer" key={i}>
+          <label
+            className={clsx("answer", {
+              "answer-checked": checked,
+              correctAnswer:
+                checked && answers[questionId] === element.correct_answer,
+              wrongAnswer:
+                checked && answers[questionId] !== element.correct_answer,
+            })}
+            key={i}
+          >
             <input
               type="radio"
               name={`q${questionId}`}
               value={he.decode(opt)}
-              onChange={()=> handleChange(he.decode(opt))}
+              onChange={() => handleChange(questionId, he.decode(opt))}
             />
             <span>{he.decode(opt)}</span>
           </label>
