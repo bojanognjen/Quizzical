@@ -7,6 +7,14 @@ export default function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  
+  const [replays, setReplays] = useState(0);
+
+  function handleReset(e) {
+    e.preventDefault();
+    setReplays(prev => prev + 1)
+    setGameStarted(false)
+  }
 
   useEffect(() => {
     // define async function inside useEffect
@@ -26,7 +34,7 @@ export default function App() {
     }
 
     fetchData();
-  }, []); // empty deps → run only once when component mounts
+  }, [replays]); // empty deps → run only once when component mounts
 
   return (
     <div className="app-container">
@@ -35,7 +43,7 @@ export default function App() {
       {!gameStarted ? (
         <StartScreen onStart={() => setGameStarted(true)} />
       ) : (
-        <GameScreen data={ data }/>
+        <GameScreen data={ data } handleReset={handleReset}/>
       )}
     </div>
   );

@@ -9,6 +9,7 @@ export default function Question({
   answers,
   correct_answer,
   checked,
+  setScore
 }) {
   function shuffleArray(array) {
     const arr = [...array];
@@ -42,11 +43,20 @@ export default function Question({
         {options.map((opt, i) => (
           <label
             className={clsx("answer", {
-              "answer-checked": checked,
               correctAnswer:
-                checked && answers[questionId] === element.correct_answer,
+                checked  &&
+                opt === element.correct_answer,
               wrongAnswer:
-                checked && answers[questionId] !== element.correct_answer,
+                checked && 
+                answers[questionId] !== element.correct_answer &&
+                opt === answers[questionId],
+              endingBorders:
+                checked &&
+                !answers.includes(opt) &&
+                element.correct_answer !== opt,
+              endingFontColor:
+              checked &&
+              opt !== element.correct_answer
             })}
             key={i}
           >

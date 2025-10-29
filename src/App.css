@@ -104,13 +104,23 @@ z-index: -1;
 
 .answer.correctAnswer {
   color: hsl(231, 42%, 28%);
-  background-color: hsl(133, 46%, 71%);
+  background-color: hsl(133, 46%, 71%) !important;
+  border: none;
 }
 
 .answer.wrongAnswer {
-  background-color: hsl(356, 62%, 91%);
+  background-color: hsl(356, 62%, 91%) !important;
+  border: none;
 }
 
 .check {
   margin-top: 3rem;
+}
+
+.endingBorders {
+  border: 1px solid hsl(229, 30%, 72%) !important;
+}
+
+.endingFontColor {
+  color: hsl(231, 17%, 62%) !important;
 }
