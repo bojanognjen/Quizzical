@@ -31,7 +31,7 @@ export default function GameScreen({ data, handleReset}) {
   })
 
   useEffect(()=> {
-    setScore(score + pseudoScore);
+    setScore(pseudoScore);
   }, [pseudoScore])
 
   return (

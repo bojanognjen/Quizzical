@@ -45,18 +45,18 @@ export default function Question({
             className={clsx("answer", {
               correctAnswer:
                 checked  &&
-                opt === element.correct_answer,
+                he.decode(opt) === element.correct_answer,
               wrongAnswer:
                 checked && 
                 answers[questionId] !== element.correct_answer &&
-                opt === answers[questionId],
+                he.decode(opt) === answers[questionId],
               endingBorders:
                 checked &&
-                !answers.includes(opt) &&
-                element.correct_answer !== opt,
+                !answers.includes(he.decode(opt)) &&
+                element.correct_answer !== he.decode(opt),
               endingFontColor:
               checked &&
-              opt !== element.correct_answer
+              he.decode(opt) !== element.correct_answer
             })}
             key={i}
           >

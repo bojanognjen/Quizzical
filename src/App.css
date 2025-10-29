@@ -52,6 +52,7 @@ z-index: -1;
   border-radius: 15px;
   color: #fff;
   cursor: pointer;
+  margin-inline: 2rem;
 }
 
 .question__block {
