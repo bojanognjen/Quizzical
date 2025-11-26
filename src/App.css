@@ -19,11 +19,11 @@ z-index: -1;
 }
 
 .lower__corner {
-  position: absolute;
+  position: fixed;
   background-color: hsl(210, 65%, 92%);
   width: 330px;
-  height: 235px;
-  bottom: -70px;
+  height: 165px;
+  bottom: 0px;
   left: -110px;
   border-top-right-radius: 80%;
   border-top-left-radius: 70%;
