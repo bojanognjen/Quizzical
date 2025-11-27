@@ -19,8 +19,9 @@
 }
 
 html {
-  font-size: 20px;
+  font-size: 26px;
 }
+
 body {
   /* 4. Add accessible line-height */
   line-height: 1.5;
@@ -80,3 +81,8 @@ body {
   overflow-x: hidden;
 }
 
+@media (min-width: 1000px) {
+  html {
+    font-size: 16px;
+  }
+}
