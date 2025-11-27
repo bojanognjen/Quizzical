@@ -19,7 +19,7 @@
 }
 
 html {
-  font-size: clamp(16px, 4vw, 20px);
+  font-size: clamp(18px, 4vw, 19px);
 }
 body {
   /* 4. Add accessible line-height */
