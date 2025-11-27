@@ -18,6 +18,15 @@
   }
 }
 
+/* Responsive root font-size so `rem` scales on small screens.
+   - Minimum: 15px for small devices
+   - Scales with viewport width in the middle
+   - Maximum: 18px for large devices
+   This makes all `rem`-based measures larger on phones without changing every rule.
+*/
+html {
+  font-size: clamp(15px, 3.2vw, 18px);
+}
 body {
   /* 4. Add accessible line-height */
   line-height: 1.5;
