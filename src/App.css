@@ -5,10 +5,13 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  max-width: 100vw;
 }
 
 .form {
   padding: 2.5rem;
+  flex-shrink: 2;
+  min-width: 0;
 }
 
 .upper__corner {
@@ -80,13 +83,15 @@ z-index: -1;
   list-style-type: none;
   margin-top: .7rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .answer {
   border: 1px solid hsl(230, 34%, 46%);
   padding: 0.2rem 1rem;
   border-radius: .7rem;
-  margin-right: 1rem;
+  margin-right: clamp(0.3rem, 1rem, 1rem);
+  margin-bottom: .5rem;
   cursor: pointer;
 }
 
