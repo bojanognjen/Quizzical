@@ -35,7 +35,7 @@ export default function GameScreen({ data, handleReset}) {
   }, [pseudoScore])
 
   return (
-    <form onSubmit={handleSubmit} onReset={handleReset}>
+    <form className="form" onSubmit={handleSubmit} onReset={handleReset}>
       {data.results.map((element, index) => (
         <Question key={index} checked={checked} answers={answers} 
         correct_answer={element.correct_answer} element={element} questionId={index} 

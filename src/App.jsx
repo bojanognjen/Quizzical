@@ -43,7 +43,7 @@ export default function App() {
       {!gameStarted ? (
         <StartScreen onStart={() => setGameStarted(true)} />
       ) : (
-        <GameScreen data={ data } handleReset={handleReset}/>
+        <GameScreen className="gameScreen" data={ data } handleReset={handleReset}/>
       )}
     </div>
   );
