@@ -18,10 +18,6 @@
   }
 }
 
-html {
-  font-size: 26px;
-}
-
 body {
   /* 4. Add accessible line-height */
   line-height: 1.5;
