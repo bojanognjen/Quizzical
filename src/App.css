@@ -8,6 +8,8 @@
 
 .form {
   border: 1px solid purple;
+  padding: 1.5rem;
+  overflow-x: hidden;
 }
 
 .upper__corner {
