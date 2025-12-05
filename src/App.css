@@ -3,13 +3,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
-  overflow-x: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .form {
-  border: 1px solid purple;
-  padding: 1.5rem;
+  padding: 2.5rem;
 }
 
 .upper__corner {
