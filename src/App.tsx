@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import StartScreen from "./StartScreen";
 import GameScreen from "./GameScreen";
 import "./App.css";
+import type { TriviaResponse } from "./types";
 
 export default function App() {
   const [gameStarted, setGameStarted] = useState(false);
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const [data, setData] = useState<TriviaResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
   
   const [replays, setReplays] = useState(0);
 
-  function handleReset(e) {
+  function handleReset(e: React.SyntheticEvent) {
     e.preventDefault();
     setReplays(prev => prev + 1)
     setGameStarted(false)
@@ -22,18 +23,19 @@ export default function App() {
       try {
         const response = await fetch("https://opentdb.com/api.php?amount=5&category=23&difficulty=easy&type=multiple");
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          setError(`HTTP error! Status: ${response.status}`);
+          return;
         }
         const result = await response.json();
         setData(result); // save data in state
 
       } catch (err) {
-        setError(err.message); 
-        console.log(error);// save error message
+        setError(err instanceof Error ? err.message : String(err));
+        console.log(error);
       }
     }
 
-    fetchData();
+    void fetchData();
   }, [replays]); // empty deps → run only once when component mounts
 
   return (
@@ -43,7 +45,7 @@ export default function App() {
       {!gameStarted ? (
         <StartScreen onStart={() => setGameStarted(true)} />
       ) : (
-        <GameScreen className="gameScreen" data={ data } handleReset={handleReset}/>
+        <GameScreen data={data} handleReset={handleReset} />
       )}
     </div>
   );

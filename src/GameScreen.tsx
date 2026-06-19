@@ -1,13 +1,20 @@
 import Question from "./Question";
 import { useEffect, useState } from "react";
+import type { TriviaResponse } from "./types";
 
-export default function GameScreen({ data, handleReset}) {
-  const arrayLength = data.results.length
-  const [answers, setAnswers] = useState(Array(arrayLength).fill(null));
+interface Props {
+  data: TriviaResponse | null;
+  handleReset: (e: React.SyntheticEvent) => void;
+}
+
+export default function GameScreen({ data, handleReset }: Props) {
+  const arrayLength = data?.results.length ?? 0;
+  const [answers, setAnswers] = useState<(string | null)[]>(Array(arrayLength).fill(null));
   const [error, setError] = useState("");
   const [checked, setChecked] = useState(false);
+  const [score, setScore] = useState(0);
 
-   function handleSubmit(e) {
+  function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
 
     const allAnswered = answers.every((ans) => ans !== null);
@@ -19,32 +26,32 @@ export default function GameScreen({ data, handleReset}) {
     }
   }
 
-  let correctAnswers = data.results.map(el => el.correct_answer);
-
-  const [score, setScore] = useState(0);
+  const correctAnswers = data?.results.map(el => el.correct_answer) ?? [];
 
   let pseudoScore = 0;
-  answers.map(ans => { 
-    if(correctAnswers.includes(ans)) {
-      pseudoScore++
+  answers.forEach(ans => {
+    if (ans !== null && correctAnswers.includes(ans)) {
+      pseudoScore++;
     }
-  })
+  });
 
-  useEffect(()=> {
+  useEffect(() => {
     setScore(pseudoScore);
-  }, [pseudoScore])
+  }, [pseudoScore]);
+
+  if (!data) return null;
 
   return (
     <form className="form" onSubmit={handleSubmit} onReset={handleReset}>
       {data.results.map((element, index) => (
-        <Question key={index} checked={checked} answers={answers} 
-        correct_answer={element.correct_answer} element={element} questionId={index} 
+        <Question key={index} checked={checked} answers={answers}
+        correct_answer={element.correct_answer} element={element} questionId={index}
         setAnswers={setAnswers} setScore={setScore}/>
       ))}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {!checked ? 
+      {!checked ?
       <button type="submit" className="check button">
         Check answers
       </button> :
@@ -56,5 +63,5 @@ export default function GameScreen({ data, handleReset}) {
       </>
     }
     </form>
-  )
+  );
 }

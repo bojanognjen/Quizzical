@@ -1,26 +1,35 @@
 import he from "he";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import type { TriviaQuestion } from "./types";
+
+interface Props {
+  element: TriviaQuestion;
+  questionId: number;
+  setAnswers: React.Dispatch<React.SetStateAction<(string | null)[]>>;
+  answers: (string | null)[];
+  correct_answer: string;
+  checked: boolean;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
+}
 
 export default function Question({
   element,
   questionId,
   setAnswers,
   answers,
-  correct_answer,
   checked,
-  setScore
-}) {
-  function shuffleArray(array) {
+}: Props) {
+  function shuffleArray(array: string[]): string[] {
     const arr = [...array];
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+      [arr[i], arr[j]] = [arr[j]!, arr[i]!];
     }
     return arr;
   }
 
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState<string[]>([]);
 
   useEffect(() => {
     setOptions(
@@ -28,7 +37,7 @@ export default function Question({
     );
   }, []);
 
-  const handleChange = (questionIndex, value) => {
+  const handleChange = (questionIndex: number, value: string) => {
     setAnswers((prev) => {
       const newAnswers = [...prev];
       newAnswers[questionIndex] = value;
@@ -44,10 +53,10 @@ export default function Question({
           <label
             className={clsx("answer", {
               correctAnswer:
-                checked  &&
+                checked &&
                 he.decode(opt) === element.correct_answer,
               wrongAnswer:
-                checked && 
+                checked &&
                 answers[questionId] !== element.correct_answer &&
                 he.decode(opt) === answers[questionId],
               endingBorders:
@@ -55,8 +64,8 @@ export default function Question({
                 !answers.includes(he.decode(opt)) &&
                 element.correct_answer !== he.decode(opt),
               endingFontColor:
-              checked &&
-              he.decode(opt) !== element.correct_answer
+                checked &&
+                he.decode(opt) !== element.correct_answer
             })}
             key={i}
           >

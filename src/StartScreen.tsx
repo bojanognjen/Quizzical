@@ -1,4 +1,8 @@
-export default function StartScreen({ onStart }) {
+interface Props {
+  onStart: () => void;
+}
+
+export default function StartScreen({ onStart }: Props) {
   return (
     <div className="start__screen">
       <h1 className="start__title">Quizzical</h1>
@@ -7,4 +11,3 @@ export default function StartScreen({ onStart }) {
     </div>
   );
 }
-
