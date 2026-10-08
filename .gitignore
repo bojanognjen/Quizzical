@@ -9,6 +9,11 @@ lerna-debug.log*
 
 node_modules
 dist
+
+# Next.js
+.next
+out
+next-env.d.ts
 dist-ssr
 *.local
 

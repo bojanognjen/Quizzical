@@ -1,6 +1,6 @@
 import { useState } from "react";
 import clsx from "clsx";
-import type { TriviaQuestion } from "./types";
+import type { TriviaQuestion } from "../types";
 
 interface Props {
   element: TriviaQuestion;

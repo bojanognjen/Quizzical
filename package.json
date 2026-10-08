@@ -1,37 +1,31 @@
 {
-  "name": "scrimba-quiz",
+  "name": "quizzical",
   "private": true,
   "version": "0.0.0",
   "author": "Bojan Lukic",
-  "type": "module",
   "homepage": "https://bojanognjen.github.io/Quizzical/",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "eslint",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "he": "^1.2.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.30.1",
     "@types/he": "^1.2.3",
+    "@types/node": "^20.19.43",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.6.0",
     "eslint": "^9.30.1",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
+    "eslint-config-next": "^16.4.0",
     "gh-pages": "^6.3.0",
-    "globals": "^16.3.0",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.71.1",
-    "vite": "^7.0.4"
+    "typescript": "^6.0.3"
   }
 }

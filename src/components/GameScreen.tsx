@@ -1,6 +1,6 @@
 import Question from "./Question";
 import { useState } from "react";
-import type { TriviaResponse } from "./types";
+import type { TriviaResponse } from "../types";
 
 interface Props {
   data: TriviaResponse | null;
