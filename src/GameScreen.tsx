@@ -1,5 +1,5 @@
 import Question from "./Question";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { TriviaResponse } from "./types";
 
 interface Props {
@@ -12,7 +12,6 @@ export default function GameScreen({ data, handleReset }: Props) {
   const [answers, setAnswers] = useState<(string | null)[]>(Array(arrayLength).fill(null));
   const [error, setError] = useState("");
   const [checked, setChecked] = useState(false);
-  const [score, setScore] = useState(0);
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -22,31 +21,23 @@ export default function GameScreen({ data, handleReset }: Props) {
     if (!allAnswered) {
       setError("Please answer all questions before submitting.");
     } else {
+      setError("");
       setChecked(true);
     }
   }
 
-  const correctAnswers = data?.results.map(el => el.correct_answer) ?? [];
-
-  let pseudoScore = 0;
-  answers.forEach(ans => {
-    if (ans !== null && correctAnswers.includes(ans)) {
-      pseudoScore++;
-    }
-  });
-
-  useEffect(() => {
-    setScore(pseudoScore);
-  }, [pseudoScore]);
-
   if (!data) return null;
+
+  // compare each answer with the correct answer of its own question
+  const score = answers.filter(
+    (ans, i) => ans === data.results[i]?.correct_answer
+  ).length;
 
   return (
     <form className="form" onSubmit={handleSubmit} onReset={handleReset}>
       {data.results.map((element, index) => (
         <Question key={index} checked={checked} answers={answers}
-        correct_answer={element.correct_answer} element={element} questionId={index}
-        setAnswers={setAnswers} setScore={setScore}/>
+        element={element} questionId={index} setAnswers={setAnswers}/>
       ))}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -56,7 +47,7 @@ export default function GameScreen({ data, handleReset }: Props) {
         Check answers
       </button> :
       <>
-      <span>You scored {score}/5 correct answers</span>
+      <span>You scored {score}/{data.results.length} correct answers</span>
       <button type="reset" className="check button">
         Play again
       </button>

@@ -1,5 +1,4 @@
-import he from "he";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import type { TriviaQuestion } from "./types";
 
@@ -8,9 +7,7 @@ interface Props {
   questionId: number;
   setAnswers: React.Dispatch<React.SetStateAction<(string | null)[]>>;
   answers: (string | null)[];
-  correct_answer: string;
   checked: boolean;
-  setScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function Question({
@@ -29,13 +26,10 @@ export default function Question({
     return arr;
   }
 
-  const [options, setOptions] = useState<string[]>([]);
-
-  useEffect(() => {
-    setOptions(
-      shuffleArray([element.correct_answer, ...element.incorrect_answers])
-    );
-  }, []);
+  // shuffle once when the question mounts
+  const [options] = useState(() =>
+    shuffleArray([element.correct_answer, ...element.incorrect_answers])
+  );
 
   const handleChange = (questionIndex: number, value: string) => {
     setAnswers((prev) => {
@@ -45,37 +39,40 @@ export default function Question({
     });
   };
 
+  const selected = answers[questionId];
+
   return (
     <div className="question__block">
-      <p className="question">{he.decode(element.question)}</p>
+      <p className="question">{element.question}</p>
       <div className="answers">
         {options.map((opt, i) => (
           <label
             className={clsx("answer", {
               correctAnswer:
                 checked &&
-                he.decode(opt) === element.correct_answer,
+                opt === element.correct_answer,
               wrongAnswer:
                 checked &&
-                answers[questionId] !== element.correct_answer &&
-                he.decode(opt) === answers[questionId],
+                selected !== element.correct_answer &&
+                opt === selected,
               endingBorders:
                 checked &&
-                !answers.includes(he.decode(opt)) &&
-                element.correct_answer !== he.decode(opt),
+                opt !== selected &&
+                opt !== element.correct_answer,
               endingFontColor:
                 checked &&
-                he.decode(opt) !== element.correct_answer
+                opt !== element.correct_answer
             })}
             key={i}
           >
             <input
               type="radio"
               name={`q${questionId}`}
-              value={he.decode(opt)}
-              onChange={() => handleChange(questionId, he.decode(opt))}
+              value={opt}
+              disabled={checked}
+              onChange={() => handleChange(questionId, opt)}
             />
-            <span>{he.decode(opt)}</span>
+            <span>{opt}</span>
           </label>
         ))}
       </div>

@@ -84,19 +84,14 @@ z-index: -1;
   margin-top: .7rem;
   margin-bottom: 1rem;
   flex-wrap: wrap;
+  gap: .5rem 1rem;
 }
 
 .answer {
   border: 1px solid hsl(230, 34%, 46%);
   padding: 0.2rem 1rem;
   border-radius: .7rem;
-  margin-right: clamp(0.3rem, 1rem, 1rem);
-  margin-bottom: .5rem;
   cursor: pointer;
-}
-
-.answer:last-child {
-  margin: 0;
 }
 
 .answer input {
