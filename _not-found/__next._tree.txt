@@ -1,4 +1,4 @@
-:HL["/Quizzical/_next/static/chunks/2zxxhl_-061a2.css","style"]
+:HL["/Quizzical/_next/static/chunks/0q8-eaxoanv5s.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"G12LdDbMLHixciggZ20cQ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"lZsCL7smSj5jBrRU1ANSK","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
