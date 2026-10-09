@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./app.css";
 
 export const metadata: Metadata = {
   title: "Quizzical app",
